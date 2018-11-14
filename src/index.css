@@ -1,0 +1,24 @@
+ul{
+    list-style: none inside;
+    padding: 0;
+  }
+  li{
+    background-color: lightblue;
+    padding: 10px;
+    border: 1px solid lightblue;
+    border-radius: 5px;
+    width:40%;
+    margin-top:10px;
+  }
+  li:hover{
+    background-color: lightgreen;
+    cursor: pointer;
+  }
+.notification{
+  background-color: pink;
+  
+  border: 1px solid lightblue;
+  border-radius: 5px;
+
+  margin-top:10px;
+}
