@@ -28,6 +28,7 @@ class App extends Component{
   }
 
   componentDidMount(){
+    console.log("something");
     axios.get(`${Api.url()}/api/v1/todos.json`)
       .then(response => {
         this.setState({todolist:response.data})
