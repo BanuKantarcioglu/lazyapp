@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import ToDoAdder from './todoadder.js';
 import ToDoList from './todolist.js';
 import axios from 'axios';
+import Api from './Api';
+
 
 class App extends Component{
   constructor(props){
@@ -22,10 +24,11 @@ class App extends Component{
     this.handleDelete = this.handleDelete.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
+
   }
 
   componentDidMount(){
-    axios.get("http://localhost:3001/api/v1/todos.json")
+    axios.get(`${Api.url()}/api/v1/todos.json`)
       .then(response => {
         this.setState({todolist:response.data})
       })
@@ -34,7 +37,7 @@ class App extends Component{
   }
 
   handleAdd(){
-    axios.post("http://localhost:3001/api/v1/todos",  {todo:{text:this.state.newtodo}})
+    axios.post(`${Api.url()}/api/v1/todos`,  {todo:{text:this.state.newtodo}})
       .then(response => {
         this.setState((prevState)=>(
           {
@@ -73,7 +76,7 @@ class App extends Component{
   }
   handleDelete(){
     const id= this.state.todolist[this.state.current.index].id;
-    axios.delete(`http://localhost:3001/api/v1/todos/${id}`)
+    axios.delete(`${Api.url()}/api/v1/todos/${id}`)
       .then(response => {
         this.setState((prevState)=>(
             {
@@ -106,7 +109,7 @@ class App extends Component{
   }
   handleUpdate(){
     const id= this.state.todolist[this.state.current.index].id;
-    axios.put(`http://localhost:3001/api/v1/todos/${id}`,  {todo:{text:this.state.current.todotext}})
+    axios.put(`${Api.url()}/api/v1/todos/${id}`,  {todo:{text:this.state.current.todotext}})
       .then(response => {
         this.setState(function(prevState) {
           prevState.todolist[this.state.current.index] =response.data;
