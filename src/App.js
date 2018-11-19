@@ -33,7 +33,7 @@ class App extends Component{
       .then(response => {
         this.setState({todolist:response.data})
       })
-      .catch(error => console.log(console.error()))
+      .catch(error => console.log(error))
 
   }
 
@@ -48,7 +48,7 @@ class App extends Component{
           }
         ));
       })
-      .catch(error => console.log(console.error()))
+      .catch(error => console.log(error))
 
 
   }
@@ -92,7 +92,7 @@ class App extends Component{
             }
         ));
       })
-      .catch(error => console.log(console.error()))
+      .catch(error => console.log(error))
 
 
 
@@ -127,7 +127,7 @@ class App extends Component{
 
       });
       })
-      .catch(error => console.log(console.error()))
+      .catch(error => console.log(error))
 
 
 
