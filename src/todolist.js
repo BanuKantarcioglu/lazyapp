@@ -8,24 +8,26 @@ class ToDoList extends Component{
     const ind = props.current.index;
     const list = props.todolist;
     const listItems =  list.map((item,index)=>{
+      // isEditable = true/false buradaydı
             return(
               (index === ind)
               ?
                  <ToDo
-                    index={index}
                     key={item.id}
-                    text={item.text}
-                    isEditable={true}
+                    current = {index}
+                    item={item}
+                    toggle = {true}
                     temptodo ={temptodo}
                     onDelete={props.onDelete}
                     onUpdate={props.onUpdate}
-                    onToDoChange={props.onToDoChange}/>
+                    onToDoChange={props.onToDoChange}
+                    onClick={props.onClick}/>
               :
                  <ToDo
-                    index={index}
                     key={item.id}
-                    text={item.text}
-                    isEditable={false}
+                    current = {index}
+                    item={item}
+                    toggle = {false}
                     onClick={props.onClick}/>
             );
           });

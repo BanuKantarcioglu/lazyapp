@@ -28,7 +28,7 @@ class App extends Component{
   }
 
   componentDidMount(){
-    console.log("something");
+
     axios.get(`${Api.url()}/api/v1/todos.json`)
       .then(response => {
         this.setState({todolist:response.data})
@@ -52,7 +52,43 @@ class App extends Component{
 
 
   }
-  handleClick(newvalue){
+  handleClick(current){
+
+    if (current == this.state.current.index)
+    {
+      this.setState({current:{index:-1}})
+    }
+    else{
+    const id = this.state.todolist[current].id;
+    console.log( "just clicked i:" + id);
+    axios.get(`${Api.url()}/api/v1/todos/${id}`)
+    .then(response => {
+      console.log(current);
+      this.setState(prevState => {
+        prevState.todolist[current] =response.data;
+      return          {
+        newtodo:"",
+        current:
+        {
+          todotext: "",
+          index:current,
+        },
+        todolist:prevState.todolist,
+        notification:"todo retrieved..."
+      };
+
+    });
+    console.log(response.data);
+    })
+      .catch(error => console.log(error))
+    }
+/*
+    axios.get(`${Api.url()}/api/v1/todos/${id}/histories`)
+      .then(response => {
+        console.log(response.data)
+      })
+      .catch(error => console.log(error))
+
     this.setState((prevState) =>(
       {
         current:
@@ -62,6 +98,7 @@ class App extends Component{
         }
       }
     ));
+    */
   }
   handleNewEntry(newvalue){
     this.setState(
@@ -145,8 +182,8 @@ class App extends Component{
         <ToDoList
             todolist = {this.state.todolist}
             current = {this.state.current}
-            onClick ={this.handleClick}
-            onDelete={this.handleDelete}
+            onClick = {this.handleClick}
+            onDelete= {this.handleDelete}
             onToDoChange={this.handleEdit}
             onUpdate={this.handleUpdate}/>
         <hr/>
